@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}"></title>
+</head>
+<body>
+	<p>アカウント情報</p>
+    <form action="/account/search" method="post">
+        <label>ID:<input class="input" type="text" name="userID"></label><br>
+        <div><input class="search" type="submit" value="検索"/></div>
+    </form>
+
+   <div th:if="${account} !=null" th:object="${account}">
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>パスワード</th>
+                <th>メール</th>
+                <th>名前</th>
+                <th>年齢</th>
+            </tr>
+            <tr>
+                <td th:text="*{userID}">ID</td>
+                <td th:text="*{pass}">パスワード</td>
+                <td th:text="*{mail}">メール</td>
+                <td th:text="*{name}">名前</td>
+                <td th:text="*{age}">年齢</td>
+            </tr>
+        </table>
+        <p>※IDの部分が空白<br>
+      	　理由:DB⇒user_idアプリ⇒userIDになっているから(勉強になったのであえて直さない。)<br><br>
+      	　つまり、<br>
+      	　　DBの行名 / HTMLのinputタグのname / beanのフィールド名<br>
+      	　　が統一されていないといけない</p>
+    </div>
+</body>
+</html>
